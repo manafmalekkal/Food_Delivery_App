@@ -72,21 +72,6 @@ const HomeScreen = () => {
           description={category.short_description} 
         />)
         })}
-        {/* <FeaturedRow 
-          id='1'
-          title='Featured' 
-          description='Paid placement from our partners' 
-        />
-        <FeaturedRow
-          id='2'
-          title='Tasty Discounts!'
-          description='Everyones been enjoying this juicy discounts'
-        />
-        <FeaturedRow
-          id='3'
-          title='Offers near you!'
-          description='Enjoy the best offers near you'
-        /> */}
       </ScrollView>      
     </SafeAreaView>
   );

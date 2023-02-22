@@ -33,12 +33,6 @@ const Categories = () => {
             title={item.name}/>
         )
       })}
-        {/* <CategoryCard imageUrl={require('../Images/DeliveryLogo.jpg')} title='Category 1'/>
-        <CategoryCard imageUrl={require('../Images/DeliveryLogo.jpg')} title='Category 2'/>
-        <CategoryCard imageUrl={require('../Images/DeliveryLogo.jpg')} title='Category 3'/>
-        <CategoryCard imageUrl={require('../Images/DeliveryLogo.jpg')} title='Category 4'/>
-        <CategoryCard imageUrl={require('../Images/DeliveryLogo.jpg')} title='Category 5'/>
-        <CategoryCard imageUrl={require('../Images/DeliveryLogo.jpg')} title='Category 6'/> */}
     </ScrollView>
   )
 }
