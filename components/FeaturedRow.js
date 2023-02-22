@@ -1,9 +1,32 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {ArrowRightIcon} from 'react-native-heroicons/outline';
 import RestaurentCard from './RestaurentCard';
+import client from '../sanity';
 
 const FeaturedRow = ({title, description, id}) => {
+
+  const[restaurantDetails,setRestaurantDetails]=useState([]);
+
+  useEffect(()=>{
+    client.fetch(`
+    *[_type == 'featured'&& _id == $id] {
+      ...,
+      restaurants[]->{
+        ...,
+        dishes[]->,
+        type->{
+          name
+        }
+      },
+    }[0]
+    `,
+    {id}
+    ).then((data)=>{
+      setRestaurantDetails(data?.restaurants);
+    })
+  },[]);
+
   return (
     <View>
       <View className="flex-row mt-4 items-center justify-between px-4">
@@ -18,7 +41,24 @@ const FeaturedRow = ({title, description, id}) => {
             contentContainerStyle={{paddingHorizontal:15,}}
             className="pt-3"
         >
+
+          {restaurantDetails?.map((restaurantData)=>{
+            return(
             <RestaurentCard
+            key={restaurantData._id}
+            id={restaurantData._id}
+            imgUrl={restaurantData.image}
+            title={restaurantData.name}
+            rating={restaurantData.rating}
+            genre={restaurantData.type?.name}
+            address={restaurantData.address}
+            short_description={restaurantData.short_description}
+            dishes={restaurantData.dishes}
+            long={restaurantData.long}
+            lat={restaurantData.lat}
+          />)
+          })}
+            {/* <RestaurentCard
               id={1}
               imgUrl={require('../Images/DeliveryLogo.jpg')}
               title='Meed Cafe'
@@ -89,7 +129,7 @@ const FeaturedRow = ({title, description, id}) => {
             dishes={[]}
             long={0.123}
             lat={12.345}
-            />
+            /> */}
         </ScrollView>
     </View>
   )
