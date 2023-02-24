@@ -11,9 +11,11 @@ const CartIcon = () => {
     const navigation = useNavigation();
     const cartTotal = useSelector(selectCartTotal);
 
+    if(items.length === 0) return null;
+
   return (
     <View className='absolute bottom-10 w-full z-50'>
-      <TouchableOpacity className='mx-5 bg-[#e6394b] p-4 rounded-lg flex-row items-center space-x-1'>
+      <TouchableOpacity onPress={()=>navigation.navigate('Cart')} className='mx-5 bg-[#e6394b] p-4 rounded-lg flex-row items-center space-x-1'>
         <Text className='text-white font-extrabold text-lg bg-[#a92633] py-1 px-2'>{items.length}</Text>
         <Text className='flex-1 text-center text-lg text-white font-extrabold'>View Cart</Text>
         <Text className='text-lg text-white font-extrabold'>
