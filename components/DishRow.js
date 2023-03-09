@@ -11,7 +11,7 @@ const DishRow = ({
     name, 
     description, 
     price, 
-    image
+    image,
 }) => {
 
     const[isPressed,setIsPressed]=useState(false);
@@ -27,7 +27,7 @@ const DishRow = ({
 
         dispatch(removeFromCart({id}));
     }
-
+// return <Text>Hi</Text>
   return (
     <>
     <TouchableOpacity 

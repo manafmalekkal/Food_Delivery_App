@@ -19,7 +19,7 @@ const CartIcon = () => {
         <Text className='text-white font-extrabold text-lg bg-[#a92633] py-1 px-2'>{items.length}</Text>
         <Text className='flex-1 text-center text-lg text-white font-extrabold'>View Cart</Text>
         <Text className='text-lg text-white font-extrabold'>
-            <Currency quantity={cartTotal} currnecy='INR'/>
+            <Currency quantity={cartTotal} currency='INR'/>
         </Text>
       </TouchableOpacity>
     </View>

@@ -5,7 +5,7 @@ import { urlFor } from '../sanity'
 import { ArrowLeftIcon, ChevronRightIcon, StarIcon, MapPinIcon, QuestionMarkCircleIcon } from 'react-native-heroicons/outline'
 import DishRow from '../components/DishRow'
 import CartIcon from '../components/CartIcon'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setRestaurant } from '../features/restaurantSlice'
 
 const RestaurantScreen = () => {
@@ -25,7 +25,7 @@ const RestaurantScreen = () => {
         long,
         lat
     }, } = useRoute();
-
+    console.log({dishes})
     useEffect(()=>{
       dispatch(setRestaurant({
         id,
@@ -89,7 +89,7 @@ const RestaurantScreen = () => {
 
       <View className='pb-36'>
         <Text className='px-4 pt-6 mb-3 font-bold text-xl'>Menu</Text>
-        {dishes.map((items)=>{
+        {dishes.map((items)=>
                 <DishRow
                     key={items._id}
                     id={items._id}
@@ -98,7 +98,7 @@ const RestaurantScreen = () => {
                     price={items.price}
                     image={items.image}
                 /> 
-        })}
+        )}
       </View>
     </ScrollView>
     </>

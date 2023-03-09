@@ -11,7 +11,7 @@ import Currency from 'react-currency-formatter'
 
 const CartScreen = () => {
 
-    const [gruopedCartItems,setGroupedCartItems] = useState();
+    const [groupedCartItems,setGroupedCartItems] = useState();
     const items = useSelector(selectCartItems);
     const restaurant = useSelector(selectRestaurant);
     const navigation = useNavigation();
@@ -19,11 +19,16 @@ const CartScreen = () => {
     const cartTotal = useSelector(selectCartTotal);
 
     useEffect(() => {
+        console.log({items})
         const groupedItems = items.reduce((acc,curr) => {
-            (acc[curr.id] = acc[curr.id] || []).push(curr) 
-        }, {});
+            (acc[curr['id']] = acc[curr['id']] || []).push(curr) 
+        return acc;
+        },{});
         setGroupedCartItems(groupedItems);
+    console.log({groupedCartItems})
+
     },[items])
+
 
   return (
     <SafeAreaView className='bg-white flex-1'>
@@ -52,9 +57,9 @@ const CartScreen = () => {
                 </TouchableOpacity>
             </View>
             <ScrollView>
-                {Object.entries(gruopedCartItems).map(([key,item]) => 
-                    <View key={key}>
-                        <Text className='text-[#e6394b]'>{item.length} x </Text>
+                {groupedCartItems && Object.entries(groupedCartItems).map(([key,item]) => 
+                    <View key={key} className='flex-row space-x-4 space-y-4 items-center mx-2 border-b border-gray-300 p-3'>
+                        <Text className='text-[#e6394b] font-bold'>{item.length} x </Text>
                         <Image 
                             source={{uri: urlFor(item[0]?.image).url()}}
                             className='h-12 w-12 rounded-full'
@@ -64,7 +69,7 @@ const CartScreen = () => {
                             <Currency quantity={item[0]?.price} currency='INR'/>
                         </Text>
                         <TouchableOpacity
-                            onPress={()=>dispatch(removeFromCart({id: key}))}
+                            onPress={()=>{dispatch(removeFromCart({id: key}))}}
                         >
                             <Text className='text-[#e6394b]'>Remove</Text>
                         </TouchableOpacity>
@@ -72,7 +77,7 @@ const CartScreen = () => {
                 )}
             </ScrollView>
 
-            <View className='bg-white mt-5 space-y-4'>
+            <View className='bg-white mt-5 space-y-4 p-5'>
 
                 <View className='flex-row justify-between'>
                     <Text className='text-gray-400'>Subtotal</Text>

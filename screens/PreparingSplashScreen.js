@@ -9,14 +9,14 @@ const PreparingSplashScreen = () => {
 
     const navigation = useNavigation();
 
-    useEffect(()=>{
-        setTimeout(() => {
-            navigation.navigate('Delivery')
-        },5000)
-    },[])
+    // useEffect(()=>{
+    //     setTimeout(() => 
+    //         navigation.navigate('Delivery')
+    //     ,5000)
+    // },[navigation])
 
   return (
-   <SafeAreaView className='flex-1 justify-center items-center bg-[#efefef]'>
+   <SafeAreaView className='flex-1 justify-center items-center bg-[#ffffff]'>
     <Animatable.Image
         source={require('../Images/deliveryGif.gif')}
         animation='slideInUp'
@@ -30,7 +30,8 @@ const PreparingSplashScreen = () => {
     >
         Your order is being placed!
     </Animatable.Text>
-    <Progress.Circle size={60} indeterminate={true} color='#e6394b'/>
+    <Progress.CircleSnail size={60} indeterminate={true} color='#e6394b'/>
+    <Text onPress={()=>{navigation.navigate('Delivery')}}>next page</Text>
    </SafeAreaView>
   )
 }
